@@ -14,45 +14,31 @@ import Observation
 
   var persons: [Person] = []
 
-  // Data fetched using async methods
-
   func refreshData() {
-    Task {
-      if let newPersons = try? await fetchData() {
-        persons = newPersons
-      }
+    if let newPersons = try? readData() {
+      persons = newPersons
     }
   }
 
-  func fetchData() async throws -> [Person] {
-    let address = "https://jsonplaceholder.typicode.com/users"
-    guard let url = URL(string: address) else {
-      print("Bad url")
-      throw FetchError.badURL
-    }
-    let request = URLRequest(url: url)
-
-    let (data, response) = try await URLSession.shared.data(for: request)
-    guard
-      let response = response as? HTTPURLResponse,
-      response.statusCode < 400 else {
-      print("Bad response")
-      throw FetchError.badResponse
+  func readData() throws -> [Person] {
+    guard let fileURL = Bundle.main.url(forResource: "people", withExtension: "json") else {
+      throw ReadError.badURL
     }
 
     do {
-      let persons = try JSONDecoder().decode([Person].self, from: data)
-      return persons
+      let fileContents = try Data(contentsOf: fileURL)
+      let persons = try JSONDecoder().decode([Person].self, from: fileContents)
+      return persons.sorted(using: KeyPathComparator(\.lastName))
     } catch {
+      // TODO: return some other data
       print(error)
-      throw FetchError.badJSON
+      throw ReadError.badJSON
     }
   }
 }
 
-// Possible errors for fetch
-enum FetchError: Error {
+// Possible errors for read
+enum ReadError: Error {
   case badURL
-  case badResponse
   case badJSON
 }

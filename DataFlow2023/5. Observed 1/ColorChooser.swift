@@ -11,20 +11,16 @@ struct ColorChooser: View {
   @Bindable var colorSet: ColorSet
 
   var body: some View {
-    ZStack {
-      Color(red: 0.95, green: 0.95, blue: 0.95)
-        .edgesIgnoringSafeArea(.all)
+    VStack {
+      // The 2 Chooser subviews also get passed the Observed
 
-      VStack {
-        // The 2 Chooser subviews also get passed the Observed
-        ForeColorChooser(colorSet: colorSet)
+      ForeColorChooser(colorSet: colorSet)
 
-        Divider()
+      Divider()
 
-        BackColorChooser(colorSet: colorSet)
-      }
-      .frame(width: 300)
+      BackColorChooser(colorSet: colorSet)
     }
+    .frame(width: 300)
   }
 }
 

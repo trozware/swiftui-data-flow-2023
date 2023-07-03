@@ -16,6 +16,7 @@ struct Numbers: View {
       // Display @State property
       Text("Parent view value = \(stepperValue)")
         .font(.title)
+        .padding()
 
       // Pass to subview as a Binding ($) for two-way editing
       NumberChooser(stepperValue: $stepperValue)

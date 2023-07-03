@@ -31,18 +31,19 @@ struct GrandChildView: View {
 
       VStack {
         Image(systemName: imageName).padding()
+          .foregroundStyle(Color.white)
+          .font(.system(size: 100))
 
         // Toggling the environment object value changes
         // all the views that use it
         Button(action: { userSettings.isLoggedIn.toggle() }) {
           Text(buttonText)
+            .padding()
         }
-        .grayButtonStyle()
       }
       .padding()
     }
-    .foregroundColor(.white)
-    .font(.system(size: 100))
+
   }
 }
 

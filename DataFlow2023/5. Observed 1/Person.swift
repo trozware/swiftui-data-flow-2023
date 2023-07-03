@@ -16,38 +16,52 @@ import Observation
   // it must be an Observable for the data flow to work
   // And each property must have an initial value
 
-  var id: Int = 0
-  var name: String = ""
-  var phone: String = ""
-  var street: String = ""
-  var suite: String = ""
-  var city: String = ""
-  var zipcode: String = ""
+  var id : String = ""
+  var firstName : String = ""
+  var lastName : String = ""
+  var email : String = ""
+  var address1 : String = ""
+  var address2 : String = ""
+  var city : String = ""
+  var state : String = ""
+  var postcode : String = ""
+  var country : String = ""
+
+  var fullName: String {
+    "\(firstName) \(lastName)"
+  }
+
+  var displayID: String {
+    String(id.suffix(8))
+  }
 
   // Decoding from JSON
 
+  enum CodingKeys: String, CodingKey {
+    case id = "id"
+    case firstName = "firstName"
+    case lastName = "lastName"
+    case email = "email"
+    case address1 = "address1"
+    case address2 = "address2"
+    case city = "city"
+    case state = "state"
+    case postcode = "postcode"
+    case country = "country"
+  }
+
   required init(from decoder: Decoder) throws {
     let values = try decoder.container(keyedBy: CodingKeys.self)
-    id = try values.decode(Int.self, forKey: .id)
-    name = try values.decode(String.self, forKey: .name)
-    phone = try values.decode(String.self, forKey: .phone)
-    let address = try values.decode(Address.self, forKey: .address)
-    suite = address.suite
-    city = address.city
-    zipcode = address.zipcode
-  }
-
-  // The keys used from the JSON
-  enum CodingKeys: String, CodingKey {
-    case id, name, phone, address
-  }
-
-  // Intermediary sub-structure for use when decoding
-  struct Address: Codable {
-    var street: String = ""
-    var suite: String = ""
-    var city: String = ""
-    var zipcode: String = ""
+    id = try values.decode(String.self, forKey: .id)
+    firstName = try values.decode(String.self, forKey: .firstName)
+    lastName = try values.decode(String.self, forKey: .lastName)
+    email = try values.decode(String.self, forKey: .email)
+    address1 = try values.decode(String.self, forKey: .address1)
+    address2 = try values.decode(String.self, forKey: .address2)
+    city = try values.decode(String.self, forKey: .city)
+    state = try values.decode(String.self, forKey: .state)
+    postcode = try values.decode(String.self, forKey: .postcode)
+    country = try values.decode(String.self, forKey: .country)
   }
 
   // To supply sample data to previews
@@ -55,13 +69,18 @@ import Observation
 
   static var samplePerson: Person {
     let person = Person()
-    person.id = 99
-    person.name = "Jane Doe"
-    person.phone = "123 456 7890"
-    person.street = "Nowhere Road"
-    person.suite = "37"
-    person.city = "Springfield"
-    person.zipcode = "123456"
+
+    person.id = "3bfe060c-652f-4d55-bb75-1e5cc1078d9a"
+    person.firstName = "Win"
+    person.lastName = "Gascoyne"
+    person.email = "wgascoyne1w@spiegel.de"
+    person.address1 = "7 Dwight Drive"
+    person.address2 = "Suite 9"
+    person.city = "Muroto-misakicho"
+    person.state = ""
+    person.postcode = "781-7109"
+    person.country = "Japan"
+
     return person
   }
 }

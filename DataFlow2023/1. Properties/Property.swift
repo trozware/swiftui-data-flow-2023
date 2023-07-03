@@ -15,6 +15,7 @@ struct Property: View {
     // Using property directly
     Text(greeting)
       .font(.title)
+      .padding()
       .navigationTitle("Property")
   }
 }

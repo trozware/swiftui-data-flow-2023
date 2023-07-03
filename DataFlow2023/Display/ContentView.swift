@@ -10,12 +10,6 @@ import SwiftUI
 struct ContentView: View {
   @State private var selectedDataLinkId: Int?
 
-  var selectedDataLink: DataLink? {
-    DataLink.dataLinks.first {
-      $0.id == selectedDataLinkId
-    }
-  }
-
   var body: some View {
     NavigationSplitView {
       SidebarView(selectedDataLinkId: $selectedDataLinkId)

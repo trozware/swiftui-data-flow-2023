@@ -24,7 +24,7 @@ struct ColorSetView: View {
         Spacer()
 
         Image(systemName: "cat.fill")
-          .foregroundColor(colorSet.foregroundColor)
+          .foregroundStyle(colorSet.foregroundColor)
           .font(.system(size: 200))
 
         Spacer()

@@ -50,6 +50,5 @@ struct PizzaNamePickerRow: View {
       }
     }
     .contentShape(Rectangle())
-    .foregroundColor(.primary)
   }
 }

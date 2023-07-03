@@ -9,12 +9,12 @@ import SwiftUI
 
 struct NumberBlock: View {
   // As this view never changes the value, there is no need to bind it
-  var stepperValue: Int
+  let stepperValue: Int
 
   var body: some View {
     Image(systemName: "\(stepperValue).square")
       .font(.system(size: 100))
-      .foregroundColor(.blue)
+      .foregroundStyle(Color.blue)
       .padding(.bottom, 20)
   }
 }

@@ -21,7 +21,7 @@ struct ChildView: View {
         GrandChildView()
           .padding()
       }
-      .foregroundColor(.white)
+      .foregroundStyle(Color.white)
       .padding()
     }
   }

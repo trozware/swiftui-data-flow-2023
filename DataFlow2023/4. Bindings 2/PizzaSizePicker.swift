@@ -16,7 +16,7 @@ struct PizzaSizePicker: View {
     Section(header: Text("Select your size:").font(.headline)) {
       Picker("", selection: $selectedPizzaSize) {
         ForEach(PizzaSize.allCases, id: \.self) { pizzaSize in
-          Text(pizzaSize.rawValue.capitalized).tag(pizzaSize)
+          Text(pizzaSize.rawValue.capitalized)
         }
       }
       .pickerStyle(.segmented)

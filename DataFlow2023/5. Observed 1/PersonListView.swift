@@ -16,20 +16,18 @@ struct PersonListView: View {
   var body: some View {
     List(selection: $selectedPerson) {
       ForEach($personList.persons) { $person in
-        Text(person.name)
+        Text(person.fullName)
           .tag(person)
       }
     }
     .inspector(isPresented: $shouldShowInspector) {
       if let selectedPerson {
         PersonEditView(person: selectedPerson)
-      } else {
-        Text("Select a person from the list.")
       }
     }
     .navigationTitle("People")
 
-    // This runs whenever the view appears to load the initial data
+    // This runs whenever the view appears to load the data
     .onAppear {
       personList.refreshData()
     }

@@ -14,24 +14,27 @@ struct PersonEditView: View {
   var body: some View {
     Form {
       HStack {
-        Text("ID")
+        Text("ID:")
         Spacer()
-        Text("\(person.id)")
+        Text("\(person.displayID)")
       }
 
-      TextField("Name", text: $person.name)
-      TextField("Phone", text: $person.phone)
+      TextField("First Name:", text: $person.firstName)
+      TextField("Last Name:", text: $person.lastName)
+      TextField("Email:", text: $person.email)
 
       Section("Address") {
-        TextField("Suite", text: $person.suite)
-        TextField("Street", text: $person.street)
-        TextField("City", text: $person.city)
-        TextField("Zip", text: $person.zipcode)
+        TextField("Line 1:", text: $person.address1)
+        TextField("Line 2:", text: $person.address2)
+        TextField("City:", text: $person.city)
+        TextField("Street:", text: $person.state)
+        TextField("Post Code:", text: $person.postcode)
+        TextField("Country:", text: $person.country)
       }
     }
     .textFieldStyle(.squareBorder)
     .formStyle(.grouped)
-    .frame(width: 300)
+    .frame(minWidth: 300, minHeight: 400)
   }
 }
 

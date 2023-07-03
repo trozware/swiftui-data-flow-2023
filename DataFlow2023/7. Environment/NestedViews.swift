@@ -25,8 +25,8 @@ struct NestedViews: View {
         // Button toggles value in environment object
         Button(action: { userSettings.isLoggedIn.toggle() }) {
           Text(userSettings.isLoggedIn ? "Log Out" : "Log In")
+            .padding()
         }
-        .grayButtonStyle()
         .padding()
 
         Spacer()
