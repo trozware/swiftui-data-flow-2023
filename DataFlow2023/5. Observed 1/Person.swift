@@ -9,23 +9,23 @@ import Foundation
 import Observation
 
 @Observable class Person: Identifiable, Decodable {
+  
   // Main model for use as Observable
   // Derived from JSON
 
   // Even though this is not observed directly,
   // it must be an Observable for the data flow to work
-  // And each property must have an initial value
 
-  var id : String = ""
-  var firstName : String = ""
-  var lastName : String = ""
-  var email : String = ""
-  var address1 : String = ""
-  var address2 : String = ""
-  var city : String = ""
-  var state : String = ""
-  var postcode : String = ""
-  var country : String = ""
+  var id : String
+  var firstName : String
+  var lastName : String
+  var email : String
+  var address1 : String
+  var address2 : String
+  var city : String
+  var state : String
+  var postcode : String
+  var country : String
 
   var fullName: String {
     "\(firstName) \(lastName)"
@@ -65,21 +65,24 @@ import Observation
   }
 
   // To supply sample data to previews
-  init() {}
 
   static var samplePerson: Person {
-    let person = Person()
+    let json = """
+      {
+      "id":"550a57d6-6f78-47d9-a226-3e2eb8d90f22",
+      "firstName":"Bennie",
+      "lastName":"McGonigle",
+      "email":"bmcgoniglec@ebay.co.uk",
+      "address1":"54217 Marcy Lane",
+      "address2":"5th Floor",
+      "city":"Stadtbredimus",
+      "state":"",
+      "postcode":"L-5451",
+      "country":"Luxembourg"}
+    """
 
-    person.id = "3bfe060c-652f-4d55-bb75-1e5cc1078d9a"
-    person.firstName = "Win"
-    person.lastName = "Gascoyne"
-    person.email = "wgascoyne1w@spiegel.de"
-    person.address1 = "7 Dwight Drive"
-    person.address2 = "Suite 9"
-    person.city = "Muroto-misakicho"
-    person.state = ""
-    person.postcode = "781-7109"
-    person.country = "Japan"
+    let jsonData = Data(json.utf8)
+    let person = try! JSONDecoder().decode(Person.self, from: jsonData)
 
     return person
   }

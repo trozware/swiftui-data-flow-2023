@@ -36,6 +36,7 @@ struct UsingState: View {
     }
     .frame(minWidth: 150, minHeight: 100)
     .buttonStyle(.borderless)
+    .buttonRepeatBehavior(.enabled)
     .navigationTitle("State")
   }
 }

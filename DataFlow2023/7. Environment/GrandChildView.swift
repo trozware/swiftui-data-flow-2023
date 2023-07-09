@@ -16,6 +16,10 @@ struct GrandChildView: View {
     // This grandchild view now gets access to the environment object
     // even though its parent does not.
 
+    // An @Environment property cannot be used as a Binding to a control like a Toggle
+    // This extra internal property makes that work.
+    @Bindable var userSettingsBindable = userSettings
+
     let imageName = userSettings.isLoggedIn
     ? "person.crop.square"
     : "questionmark.square"
@@ -24,9 +28,13 @@ struct GrandChildView: View {
     ? "Log Out"
     : "Log In"
 
+    let toggleText = userSettings.isLoggedIn
+    ? "User is logged out"
+    : "User is logged in"
+
     // because there is more than one statement in the body method
     // the return keyword is needed to return the View
-    return ZStack {
+    ZStack {
       Color.blue
 
       VStack {
@@ -40,10 +48,13 @@ struct GrandChildView: View {
           Text(buttonText)
             .padding()
         }
+
+        Toggle(isOn: $userSettingsBindable.isLoggedIn, label: {
+          Text(toggleText)
+        })
       }
       .padding()
     }
-
   }
 }
 
